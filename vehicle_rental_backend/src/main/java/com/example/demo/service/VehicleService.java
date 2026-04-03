@@ -31,7 +31,18 @@ public class VehicleService {
     }
 
     public Vehicle addVehicle(Vehicle vehicle) {
-        return vehicleRepository.save(vehicle);
+    	String imageUrl = vehicle.getImageUrl();
+
+    	if (imageUrl != null && imageUrl.contains("localhost")) {
+    	    imageUrl = imageUrl.replace(
+    	        "http://localhost:8080",
+    	        "https://vehiclerental-production-4632.up.railway.app"
+    	    );
+    	}
+
+    	vehicle.setImageUrl(imageUrl);
+
+    	return vehicleRepository.save(vehicle);
     }
 
     public Vehicle updateVehicle(Long id, Vehicle updatedVehicle) {
@@ -42,7 +53,16 @@ public class VehicleService {
             vehicle.setNumberPlate(updatedVehicle.getNumberPlate());
             vehicle.setType(updatedVehicle.getType());
             vehicle.setPricePerDay(updatedVehicle.getPricePerDay());
-            vehicle.setImageUrl(updatedVehicle.getImageUrl());
+            String imageUrl = updatedVehicle.getImageUrl();
+
+            if (imageUrl != null && imageUrl.contains("localhost")) {
+                imageUrl = imageUrl.replace(
+                    "http://localhost:8080",
+                    "https://vehiclerental-production-4632.up.railway.app"
+                );
+            }
+
+            vehicle.setImageUrl(imageUrl);
             vehicle.setAvailable(updatedVehicle.isAvailable());
             return vehicleRepository.save(vehicle);
         }
