@@ -1,0 +1,17 @@
+# Java
+target/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+.env
+vehicle_rental_backend/.env
+vehicle_rental_backend/src/main/resources/application.properties
